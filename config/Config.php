@@ -8,8 +8,6 @@ define('DB_USER', 'root');
 define('DB_PASS', 'root');
 define('DB_NAME', 'resumator_interview_response');
 
-define('DEVELOPMENT_EMAIL', "jgraham84@gmail.com");
-
 define('INSTALL_ROOT', '/data/websites/resumator/interview_response');
 define('BASE_URL', "http://localhost");
 
