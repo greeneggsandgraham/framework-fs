@@ -1,0 +1,8 @@
+RewriteEngine On
+
+RewriteRule !(\.ico|index\.php|^demo/.*|^test/.*|^drop/.*|^dev/.*|^css/.*|^js/.*|^img/.*|^svn/.*|^trac/.*)$ /interview_response/index.php [nocase,last]
+
+php_value max_execution_time 3600
+php_value memory_limit "2048M"
+php_value post_max_size "128M"
+php_value upload_max_filesize "200M"
