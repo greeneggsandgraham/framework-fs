@@ -1,0 +1,10 @@
+Purpose:
+
+Build an application from scratch using PHP such that:
+ - http://$URL/$CLASS_NAME/$ID will display a "detail" page for an object of type $CLASS_NAME with id = $ID
+ - http://$URL/$CLASS_NAME/form will allow user to add new object of type $CLASS_NAME given the columns defined by $CLASS_NAME's MySQL table
+ - On http://$URL/$CLASS_NAME/$ID, a button will be present to add existing objects of other types.  All "related objects" will be displayed on this page as well. 
+ - A MySQL_Helper will be available to hide raw SQL from developer and aid in forming SQL statements.
+ - generate new classes via the command line or via the web interface
+  - php /path/to/application/scripts/generate.php $CLASS_NAME $PROP_1_ID:$PROP_1_VAL $PROP_2_ID:$PROP_2_VAL ...
+  - navigating to http://$URL/$CLASS_NAME will redirect to form offering fields to create this class 
