@@ -1,11 +1,19 @@
 <?php
 
-class PathHelper {        
-    public function parseUrl() {
+class PathHelper {
+    public function getUrl() {
+	return $_SERVER['REQUEST_URI'];
+    }
+    
+    public function parseUrl($url = null) {
+	if (is_null($url)) {
+	    $url = self::getUrl();
+	}
+	
 	$parsed_url = array('section'=>null, 'action'=>null, 'id'=>null);
 	
 	// $_SERVER['REQUEST_URI'] should look something like '/interview_response/${section}/${action}/${id}
-	$pieces = explode('/', $_SERVER['REQUEST_URI']);
+	$pieces = explode('/', $url);
 	if (is_array($pieces) && $pieces[0] == '') {
 	    array_shift($pieces);
 	}
