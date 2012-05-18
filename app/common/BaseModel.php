@@ -3,8 +3,10 @@
 abstract class BaseModel {
     private static $class_name = null;
     private static $model_name = null;
-    
+    private static $mysql_connection = null;
+
     public function __construct() {
+	self::$mysql_connection = new MySql();	
     }
 
     protected function className() {
@@ -27,12 +29,36 @@ abstract class BaseModel {
     }
 		  
     public function primaryId() {
-	$class_name = $this->modelName();
-	$pk = $class_name . '_id';
+	$pk = $this->primaryKey();
 	return $this->{$pk};
     }
 
-    public function properties() {
-	return array('create_dt' => array(), $this->primaryId() => array(), 'name' => array());
+    public function primaryKey() {
+	return $this->modelName() . '_id';
     }
+
+    public function properties() {
+	return array(
+	    'create_dt' => array(),
+	    $this->primaryKey() => array(),
+	    'name' => array()
+	    
+	);
+    }
+
+    public function load($mysql_resource) {
+	while ($row = mysql_fetch_array($mysql_resource)) {
+	    foreach ($row as $k=>$v) {
+		// We are getting duplicates here.  Will investigate later
+		if (!is_numeric($k)) {
+		    $this->{$k} = $v;
+		}
+	    }
+	}
+	return $this;
+    }
+
+    public function save() {}
+
+    public function delete() {}    
 }
