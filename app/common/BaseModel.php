@@ -3,62 +3,65 @@
 abstract class BaseModel {
     private static $class_name = null;
     private static $model_name = null;
-    private static $mysql_connection = null;
-
-    public function __construct() {
-	self::$mysql_connection = new MySql();	
-    }
 
     protected function className() {
 	if (is_null(self::$class_name)) {
-	    self::$class_name = get_class($this);
+	    self::$class_name = get_called_class();
 	}
 	return self::$class_name;
     }
 
-    protected function modelName() {
-	if (is_null(self::$model_name)) {
-	    $class_name = $this->className();
-	    if (2 < count(explode('Model', $class_name))) {
-		throw new Exception('Dont know what to do with class name of ' . $class_name);
-	    }
-	    
-	    self::$model_name = str_replace('Model', '', $class_name);
+    protected function tableName($class_name=null) {
+	if (is_null($class_name)) {
+	    $class_name = self::className();
 	}
-	return self::$model_name;
+	return StringHelper::camelToSnake($class_name);
     }
-		  
+
     public function primaryId() {
-	$pk = $this->primaryKey();
+	$pk = self::primaryKey();
 	return $this->{$pk};
     }
 
     public function primaryKey() {
-	return $this->modelName() . '_id';
+	return StringHelper::camelToSnake(self::className()) . '_id';
     }
 
     public function properties() {
 	return array(
 	    'create_dt' => array(),
-	    $this->primaryKey() => array(),
+	    self::primaryKey() => array(),
 	    'name' => array()
 	    
 	);
     }
 
-    public function load($mysql_resource) {
-	while ($row = mysql_fetch_array($mysql_resource)) {
-	    foreach ($row as $k=>$v) {
-		// We are getting duplicates here.  Will investigate later
-		if (!is_numeric($k)) {
-		    $this->{$k} = $v;
-		}
-	    }
+    public function load($select_expr=null) {
+	$class_name = self::className();
+	if (is_null($class_name)) {
+	    throw new Exception('Have no idea what $class_name is.  Should either be null of a String');
 	}
-	return $this;
+
+	// If we have a string, hopefully a valid object name
+	// If so, let's produce a mysql_resource
+	if (is_string($class_name)) {
+	    if (!class_exists($class_name)) {
+		throw new Exception('$class_name = "' . $class_name . '" DNE');
+	    }
+
+	    // This is where the thing is actually loaded
+	    $mysql = new MySql($class_name);
+	    return $mysql->select($select_expr)->from(self::tableName($class_name));
+	} else {
+	    throw new Exception('Have no idea what $class_name is.  Should either be null of a String');
+	}
+    }
+
+    public function loadResource($mysql_resource) {
+	
     }
 
     public function save() {}
 
-    public function delete() {}    
+    public function delete() {}
 }

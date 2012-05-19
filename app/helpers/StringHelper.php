@@ -33,9 +33,9 @@ class StringHelper {
     /**
      * http://www.refreshinglyblue.com/2009/03/20/php-snake-case-to-camel-case/
      */
-    public function camelToSnake($camel) {  
+    public function camelToSnake($camel) {
 	return preg_replace_callback('/[A-Z]/',  
 	       create_function('$match', 'return "_" . strtolower($match[0]);'),  
-	       $camel);  
+	       lcfirst($camel));
     }
 }
