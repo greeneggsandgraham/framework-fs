@@ -6,7 +6,7 @@ define('DB_TYPE', 'mysql');
 define('DB_HOST', 'localhost');
 define('DB_USER', 'root');
 define('DB_PASS', 'root');
-define('DB_NAME', 'georgetown_test');
+define('DB_NAME', 'response_dev');
 
 define('INSTALL_ROOT', '/data/websites/resumator/interview_response');
 define('BASE_URL', "http://localhost/interview_response");
