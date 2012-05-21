@@ -9,6 +9,6 @@ define('DB_PASS', 'root');
 define('DB_NAME', 'georgetown_test');
 
 define('INSTALL_ROOT', '/data/websites/resumator/interview_response');
-define('BASE_URL', "http://localhost");
+define('BASE_URL', "http://localhost/interview_response");
 
 define('INIT_FILE','app/Init.php');

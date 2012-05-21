@@ -1,6 +1,6 @@
 RewriteEngine On
 
-RewriteRule !(\.ico|index\.php|^css/.*|^js/.*|^img/.*)$ /interview_response/index.php [nocase,last]
+RewriteRule !(\.ico|index\.php|/css/.*|/js/.*|/img/.*)$ /interview_response/index.php [nocase,last]
 
 php_value max_execution_time 3600
 php_value memory_limit "2048M"

@@ -1,3 +1,26 @@
-.body {
-    background-color: #000;
+body {
+    background-color: #484F64;
 }
+
+#container {
+    background-color: #E0D4B2;
+    font-color: #444;
+    font: 12px Arial, Tahoma,sans-serif;
+    margin-left: 100px; 
+    margin-right: 100px;
+    border-left-width: 2px;
+    border-right-width: 2px;
+}
+
+a {
+    color: #17A;
+    text-decoration: none;
+}
+
+a:hover, a:hover {
+    color: #0099EA;
+    text-decoration: underline;
+}
+
+
+

@@ -22,11 +22,11 @@ abstract class FileHelper {
 	if ($return_real_paths) {
 	    $path = realpath($dir);
 	    if (false === $path) {
-		throw new Exception('Unknow $dir: "'. $dir . '". Bailing out');
+		throw new Exception('Unknown $dir: "'. $dir . '". Bailing out');
 	    }
 	} else {
 	    if (!file_exists($dir)) {
-		throw new Exception('Unknow $dir: "'. $dir . '". Bailing out');
+		throw new Exception('Unknown $dir: "'. $dir . '". Bailing out');
 	    }
 	    $path = $dir;
 	}

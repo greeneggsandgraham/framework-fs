@@ -1,7 +1,8 @@
 <?php
 
+
 if (!defined('BASE_URL')) {
-    define('BASE_URL', 'http://localhost');
+    throw new Exception('BASE_URL must be defined in config/Config.php');
 }
 
 if (!defined('DB_TYPE')) {
@@ -29,8 +30,10 @@ if (!defined('INSTALL_ROOT')) {
 }
 define('APP_DIR', INSTALL_ROOT . '/app');
 define('STATIC_DIR', 'app/static');
-define('CSS_DIR', STATIC_DIR . '/css');
-define('JS_DIR', STATIC_DIR . '/js');
+
+define('IMG_URL', BASE_URL . '/app/static/img');
+define('CSS_URL', BASE_URL . '/app/static/css');
+define('JS_URL', BASE_URL . '/app/static/js');
 
 require_once(APP_DIR . '/helpers/FileHelper.php');
 
@@ -45,3 +48,7 @@ $_dir_set = FileHelper::getDirectoriesUnder(APP_DIR . '/modules', true);
 foreach ($_dir_set as $_dir) {
     FileHelper::includeFilesUnder($_dir);
 }
+
+// Maybe use these one day
+define('HEADER_OVERRIDE', null);
+define('FOOTER_OVERRIDE', null);
